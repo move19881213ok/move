@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hj</groupId>
+  <artifactId>logbackMongoExt</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>logbackMongoExt</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+		<logback.version>1.1.5</logback.version>
+		<slf4j.version>1.7.7</slf4j.version>
+		<mongodb.version>3.4.0-rc1</mongodb.version>
+        <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<repositories>
+		<repository>
+	      	<id>alimaven</id>
+	      	<name>aliyun maven</name>
+	      	<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+	    </repository>
+		<repository>
+			<id>oschina-groups</id>
+			<name>oschina-groups</name>
+			<url>http://maven.oschina.net/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>oschina-thirdparty</id>
+			<name>oschina-thirdparty</name>
+			<url>http://maven.oschina.net/content/repositories/thirdparty</url>
+		</repository>
+		<repository>
+			<id>cloud-repos</id>
+			<name>cloud Repository</name>
+			<url>http://maven.cloud.com/nexus/content/groups/public</url>
+		</repository>
+    </repositories>
+
+	<dependencies>
+		<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>mongo-java-driver</artifactId>
+		    <version>${mongodb.version}</version>
+		</dependency>
+        
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-core</artifactId>
+		    <version>${logback.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>${logback.version}</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>slf4j-api</artifactId>
+		    		<groupId>org.slf4j</groupId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-access</artifactId>
+		    <version>${logback.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>${slf4j.version}</version>
+		</dependency>
+	</dependencies>
+  
+  	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+	
+	 <build>
+        <defaultGoal>compile</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>  <!-- “编码 GBK 的不可映射字符”问题的解决 -->
+                	<skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+        
+        
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-dependency-plugin</artifactId>
+                                        <versionRange>[2.0,)</versionRange>
+                                        <goals>
+                                            <goal>copy-dependencies</goal>
+                                            <goal>unpack</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        
+    </build>
+</project>

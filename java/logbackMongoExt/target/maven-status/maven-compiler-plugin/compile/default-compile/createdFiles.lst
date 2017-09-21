@@ -1,0 +1,4 @@
+ch\qos\logback\classic\db\ext\MongoAppender.class
+ch\qos\logback\classic\db\ext\BaseMongo.class
+ch\qos\logback\classic\db\ext\MongoAndFileAppender.class
+ch\qos\logback\classic\db\ext\MongoConnectionSource.class
